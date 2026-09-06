@@ -24,8 +24,10 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Syntax check
-        run: python -m compileall -q .
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-      - name: Run Hello World script
-        run: python hello_world.py
+      - name: Run tests with pytest
+        run: pytest -v
